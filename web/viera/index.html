@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Viera Jellyfin</title>
+  <link rel="stylesheet" href="/viera/style.css">
+</head>
+<body>
+  <div id="header"><strong>VIERA JELLYFIN</strong> <span>Eigener TV-Client · 0.4</span></div>
+  <p id="status" role="status">Client wird geladen ...</p>
+  <div id="login">
+    <h1>Anmelden</h1>
+    <p>Das hinterlegte Testkonto wird automatisch angemeldet.</p>
+    <button id="test-login" type="button">Mit Testkonto anmelden</button>
+    <form id="login-form" autocomplete="off">
+      <label for="username">Benutzername</label>
+      <input id="username" name="username" type="text" autocomplete="off">
+      <label for="password">Passwort</label>
+      <input id="password" name="password" type="password" autocomplete="off">
+      <button id="login-button" type="submit">Anmelden</button>
+    </form>
+    <p class="hint">Das Testkonto ist im lokalen Mac-Proxy hinterlegt. Die TV-Sitzung bleibt im Arbeitsspeicher.</p>
+  </div>
+  <div id="browser" class="hidden">
+    <div id="toolbar">
+      <button id="back" type="button">Zurueck</button>
+      <button id="home" type="button">Bibliotheken</button>
+      <button id="logout" type="button">Abmelden</button>
+    </div>
+    <h1 id="heading">Bibliotheken</h1>
+    <form id="search-form">
+      <label for="search">Filme und Serien suchen</label>
+      <input id="search" name="search" type="text" autocomplete="off">
+      <button type="submit">Suchen</button>
+    </form>
+    <p id="page-info"></p>
+    <div id="items"></div>
+    <div id="pagination"></div>
+  </div>
+  <div id="details" class="hidden">
+    <button id="detail-back" type="button">Zurueck zur Liste</button>
+    <h1 id="detail-title"></h1>
+    <p id="technical"></p>
+    <p id="overview"></p>
+    <p class="hint">Tonspur, Zielbitrate und Format mit OK wechseln. TV-Profil: H.264, 8 Bit, AAC Stereo, bis 720p.</p>
+    <div id="sources"></div>
+  </div>
+  <div id="player" class="hidden">
+    <p id="playback-quality"></p>
+    <video id="video" controls preload="metadata"></video>
+    <div id="player-controls">
+      <button id="play-pause" type="button">Play / Pause</button>
+      <button id="rewind" type="button">-30 Sekunden</button>
+      <button id="forward" type="button">+30 Sekunden</button>
+      <button id="fullscreen" type="button">Vollbild</button>
+      <button id="stop" type="button">Wiedergabe beenden</button>
+    </div>
+    <p id="playback-position"></p>
+  </div>
+  <p id="help" class="hint">Pfeiltasten: Auswahl · OK: Oeffnen · Zurueck: vorherige Seite</p>
+  <noscript>JavaScript muss fuer diesen Client aktiviert sein.</noscript>
+  <script src="/viera/api.js"></script>
+  <script src="/viera/client.js"></script>
+</body>
+</html>

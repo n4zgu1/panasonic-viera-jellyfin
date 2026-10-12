@@ -1,0 +1,146 @@
+PANASONIC TX-42ASW504 – PRÜFPROTOKOLL
+Datum: 11.10.2026
+Untersuchung: statisch, nur lesend; keine Ausführung auf dem Fernseher.
+Eingabe: SDDL.SEC; 111482640 Bytes
+SHA-256: e914311a30f5582a54d280ee324ba3ab11ed124b160919dd2496cb93b02bb72e
+
+EXTRAKTION
+SDDL: AES-Entschlüsselung, Container- und Moduldekodierung, Dekompression.
+Rekonstruiert: PEAKS.bin, BOOT.bin, STM.bin.
+Dateisysteme: 3 UFS2 + 1 JFFS2-Variante (Magic 0x911a).
+Reguläre extrahierte Dateien: 7373; Aufteilung: {'fma4': 80, 'fma5': 7255, 'fma6': 22, 'fma7': 16}
+Symlinks wurden erfasst, nicht als Dateisystem-Verknüpfungen angelegt.
+Die Zählung ist keine Aussage über eine vollständige manuelle Prüfung jeder Datei.
+
+SIGNATURPRÜFUNG
+Öffentlicher Schlüssel aus /usr/local/customer_dl/sig_key.
+RSA-Modulus: 1024 Bit; öffentlicher Exponent: 17
+Verfahren: RSASSA-PKCS1-v1_5, SHA-1
+Signierte Daten: Bytes 0 bis 111482511, einschließlich.
+Signatur: letzte 128 Bytes; Beginn bei 111482512.
+SHA-1 der signierten Daten: 5ac4b96549cb6cf9b0a99a8bca585fdd6e0c0a31
+Original: gültig gemäß dem extrahierten öffentlichen Schlüssel.
+Negativtest: XOR 1 an Datenoffset 0x100; unveränderte Signatur lokal abgelehnt.
+Keine Datei wurde hierfür auf den Fernseher übertragen; das Original blieb unverändert.
+Dies prüft nicht, ob jeder TV-Update-/Bootpfad die Signatur korrekt erzwingt.
+Der eingebettete Schlüssel wurde nicht mit einem unabhängig vertrauenswürdigen Geräteschlüssel verglichen.
+
+FUNDSTELLEN (Offsets beziehen sich auf die jeweilige extrahierte Datei)
+
+B01_kernel
+partitions/fma3.bin
+Bytes: 5767168
+SHA-256: 2339c15db6187ed8f1a78b2abc717958e2473b0150774935e28a1e3864c66528
+0x4699ac: FreeBSD 9.2-STABLE #0
+
+B01_init_elf
+filesystems/fma4/sbin/init
+Bytes: 541388
+SHA-256: a88bb73c8f34a3478bbdfbb8cf76c76bfeac17359e9812f02f81924878fb945d
+
+B02_update
+filesystems/fma5/local/bin/customer_download
+Bytes: 85092
+SHA-256: fd20ec0327f1289e7ced50ae15981ef5404bd4f3ccbd887cf392e20abc490473
+0xd7ab: /usr/local/customer_dl/sig_key
+0xd792: /tmp/customer_dl/SIG.tmp
+0xec3e: Please wait, verifying download.
+
+B03_epop
+filesystems/fma5/local/javascript/wing/epop/epop.js
+Bytes: 25603
+SHA-256: 6314f55ed49213aa0b103e6a0d7990e1490d351b6ea8185734089253284a6243
+0x44: var sd_testmode = 0;
+0xbe3: file:///mnt/sdcard/epop_data.js
+0xc1a: file:///mnt/sdcard/epop_config_data.js
+
+B04_wlsup
+filesystems/fma4/user/local/bin/wlsup
+Bytes: 36236
+SHA-256: 35dee5f91f5cc396104247ce274463d06d46e23e13effef62d83c8e131b24f73
+0x33cf: /mnt/sdcard/ath6kl_14.ko
+0x3450: load /mnt/sdcard/ath6kl_14.ko
+
+B05_runtime
+filesystems/fma5/local/bin/ajaxceplay
+Bytes: 1033420
+SHA-256: 35be9e5f9d918dea08a7e5864c569d7aa947b0559dca2f1d651a4d1577fbebfe
+0xe185c: Usage: ajaxceplay
+0xe1c29: launch with restricted mode.
+0xe9aec: Developer_Tool
+
+B05_developer_screen
+filesystems/fma7/local/ajaxce/etc/update_device_data.js
+Bytes: 5237
+SHA-256: 5dd040d2523363cde980f4418780445415413da92e30ddd36c4dd2b8aba53880
+0x52e: For developers only
+0x1145: ebus.developer_tool.get_serial_number
+0x123e: ebus.developer_tool.update_device_data
+0x1332: ebus.developer_tool.restore_device_data
+
+B06_initrc
+filesystems/fma4/etc/initrc
+Bytes: 443
+SHA-256: 0e4abec4dc22de4574df6db6553c0e21437c80fc94b0f1d77335433a8031b9ef
+
+B06_startrc
+filesystems/fma5/target/startrc
+Bytes: 491
+SHA-256: c060e706d44ecd0ecd2586bebf1469b06de1f9afb50a152c917a70d95655e0af
+
+B06_fstab
+filesystems/fma4/etc/fstab
+Bytes: 1111
+SHA-256: 523080b01b8d0c0ea6b97aa1f4777ef6e6e8f1e6238e4fedf133e52d533de140
+
+B07_app_manager
+filesystems/fma5/local/bin/app_upd
+Bytes: 93188
+SHA-256: 9a2397347a121d7b0c4d94f23b39d8e0d08eca35e4391ff81a7eadfea73fe92a
+0x106bb: /usr/local/ajaxce/cert/appinfo.pub.der
+
+ELF-KOPF /sbin/init: 32 Bit; Big Endian; OSABI FreeBSD; e_machine=0x1040.
+Die genaue CPU-Bezeichnung wurde nicht unabhängig bestimmt.
+
+B03 – Auszug mit Original-Zeilennummern:
+3: var sd_testmode = 0;
+102:     this.init = function (config) {	
+103: 	if (sd_testmode) {
+104: 	    eval_js_file ("file:///mnt/sdcard/epop_data.js");
+105: 	    eval_js_file ("file:///mnt/sdcard/epop_config_data.js");
+106: 	    epop_data_path = "file:///mnt/sdcard/data/";
+107: 	    epop_ex_data_path = "file:///mnt/sdcard/data/";
+115: 	}
+116: 	else {
+117: 	    eval_js_file ("file:///usr/local/javascript/wing/epop/epop_data.js");
+
+B06 – relevante Startkonfiguration:
+filesystems/fma4/etc/initrc
+filesystems/fma5/target/startrc
+#!/usr/bin/sash
+/usr/local/bin/automountd
+/usr/local/bin/fifosh &
+initcfg
+/usr/pie/bin/pied &
+exec /usr/local/bin/tvsh
+
+B06 – relevante Mount-Einträge:
+/dev/fma5       /usr            ufs	ro,noatime	0 0
+/dev/fma16	/work           jffs2   rw,noatime      0 0
+/dev/fma18	/data           ufs	ro,noatime	0 0
+/dev/fma20	/auto/apps_nv	jffs2	rw,noatime,noauto	0 0
+
+UMFANGSGRENZE
+Das PEAKS-Abbild enthält fma3 bis fma7, nicht alle Flash-Partitionen.
+/data (fma18), /work (fma16) und /auto/apps_nv (fma20) fehlen.
+In Anwendungskonfigurationen referenziert: /data/startup/ssl/app_loader.js.
+Keine vollständige Kontrollflussanalyse der nativen IPP-Binärprogramme.
+Zeichenketten belegen vorhandene Referenzen, nicht automatisch erreichbare Ausführung.
+Die Abbildung von /mnt/sdcard auf tatsächlich verfügbare Datenträger ist ungeprüft.
+
+FAZIT
+Kein nutzbarer Installationsweg für eigene Apps und kein Root-Zugang nachgewiesen.
+Belegt: abgeschalteter JavaScript-Test-Ladezweig für Dateien von /mnt/sdcard.
+Indiz: externer WLAN-Kernelmodulpfad in wlsup; Aktivierung/Prüfungen unbekannt.
+Belegt: Entwicklerbildschirm mit Gerätedatenfunktionen, kein belegter App-Installierer.
+Keine modifizierte Firmware erstellt oder zur Installation freigegeben.

@@ -1,0 +1,36 @@
+# Private inputs, extracted firmware, media samples and run logs
+/inputs/*
+!/inputs/README.md
+/work/*
+!/work/.gitkeep
+/results/*
+!/results/README.md
+
+# Local network/account configuration
+/config/local.json
+/config/*.local.json
+.env
+.env.*
+!.env.example
+
+# Firmware, captures and key/certificate material
+*.bin
+*.SEC
+*.sec
+*.ko
+*.elf
+*.pem
+*.der
+*.key
+*.p12
+*.pfx
+*.pcap
+*.pcapng
+
+# Dependencies and generated files
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+*.log

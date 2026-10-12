@@ -1,0 +1,19 @@
+{
+  "name": "panasonic-viera-jellyfin",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "description": "ES5 Jellyfin client and LAN proxy for Panasonic Viera Connect TVs",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node tools/jellyfin_proxy.mjs",
+    "test": "node --test tools/test_*.mjs",
+    "test:bundle": "python3 tools/test_panasonic_bundle.py"
+  },
+  "devDependencies": {
+    "acorn": "8.15.0",
+    "jsdom": "26.1.0"
+  }
+}
